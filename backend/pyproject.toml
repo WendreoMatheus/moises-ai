@@ -1,0 +1,37 @@
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+known_third_party = ["flask", "django", "numpy", "pandas"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+default_section = "THIRDPARTY"
+combine_as_imports = true
+
+[tool.flake8]
+max-line-length = 88
+ignore = ["E203", "W503"]  # Ignored to be compatible with Black
+exclude = [".git", "__pycache__", "build", "dist"]
+
+[tool.pylint]
+disable = ["C0111", "C0103"]  # Disable docstring and variable naming checks
+max-line-length = 88
+
+[tool.mypy]
+ignore_missing_imports = true
+strict = true
+warn_unused_configs = true
+
+[tool.bandit]
+target = "path/to/your/project"
+exclude = ["tests/*"]
+
+[tool.pre-commit]
+hooks = [
+  { id = "black" },
+  { id = "isort" },
+  { id = "flake8" },
+  { id = "mypy" }
+]
