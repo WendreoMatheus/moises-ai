@@ -2,13 +2,13 @@ from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 from fastapi import HTTPException
 
-from app import models, schemas
+from backend import models, schemas
 
 def get_song(db: Session, song_id: int):
     return db.query(models.Song).filter(models.Song.id == song_id).first()
 
 def get_songs(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Song).offset(skip).limit(limit).all()        
+    return db.query(models.Song).join(models.Album).join(models.Artist).offset(skip).limit(limit).all()        
 
 def get_or_create_artist(db: Session, artist_name: str):
     try:
@@ -36,9 +36,12 @@ def get_or_create_album(db: Session, album_data: schemas.AlbumCreate, artist_id:
         db.rollback()
         raise HTTPException(status_code=500, detail="Error creating album")
 
+def handle_response_validation_error(e: SQLAlchemyError):
+    raise HTTPException(status_code=500, detail="Error creating song: " + str(e))
+
 def create_song(db: Session, song: schemas.SongCreate):
     try:
-        artist = get_or_create_artist(db, song.artist.name)
+        artist = get_or_create_artist(db, song.album.artist.name)
         album = get_or_create_album(db, song.album, artist.id)
         
         db_song = models.Song(
@@ -53,4 +56,4 @@ def create_song(db: Session, song: schemas.SongCreate):
         return db_song
     except SQLAlchemyError as e:
         db.rollback()
-        raise HTTPException(status_code=500, detail="Error creating song")
+        handle_response_validation_error(e)

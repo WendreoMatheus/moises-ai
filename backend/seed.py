@@ -1,9 +1,8 @@
 import json
 import os
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
-from models import Base, Song, Album, Artist
-from db import SessionLocal, engine
+from backend.models import Artist, Album, Song
+from backend.db import Base, SessionLocal, engine
 
 Base.metadata.create_all(bind=engine)
 
@@ -35,7 +34,8 @@ def load_data(session: Session, data: dict):
     session.commit()
 
 def main():
-    file_path = os.path.join(os.path.dirname(__file__), '..', 'data.json')
+    file_path = os.path.join(os.path.dirname(__file__), 'data.json')
+    file_path = os.path.abspath(file_path)
     with open(file_path) as f:
         data = json.load(f)
 
