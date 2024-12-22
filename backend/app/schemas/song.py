@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from backend.models import Album, Artist, Song 
+from backend.app.models import Album, Artist, Song 
 
 class ConfigBase(BaseModel):
     class Config:

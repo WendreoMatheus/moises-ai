@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 from fastapi import HTTPException
 
-from backend import models, schemas
+from backend.app import models, schemas
 
 def get_song(db: Session, song_id: int):
     return db.query(models.Song).filter(models.Song.id == song_id).first()
@@ -33,7 +33,13 @@ def get_or_create_album(db: Session, album_data: schemas.AlbumCreate, artist_id:
     try:
         album = db.query(models.Album).filter(models.Album.title == album_data.title, models.Album.year == album_data.year).first()
         if not album:
-            album = models.Album(title=album_data.title, year=album_data.year, artist_id=artist_id)
+            album = models.Album(
+                title=album_data.title, 
+                year=album_data.year, 
+                artist_id=artist_id,
+                coverArt=f"/static/images/{album_data.coverArt}",
+                poster=f"/static/images/{album_data.poster}"
+            )
             db.add(album)
             db.commit()
             db.refresh(album)
@@ -52,7 +58,7 @@ def create_song(db: Session, song: schemas.SongCreate):
         
         db_song = models.Song(
             title=song.title,
-            audio_file=song.files['audio'],
+            audio_file=f"static/files/audio/{song.files['audio']}",
             album_id=album.id,
             artist_id=artist.id
         )

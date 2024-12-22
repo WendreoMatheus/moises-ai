@@ -1,8 +1,8 @@
 import json
 import os
 from sqlalchemy.orm import Session
-from backend.models import Artist, Album, Song
-from backend.db import Base, SessionLocal, engine
+from backend.app.models import Artist, Album, Song
+from backend.app.db import Base, SessionLocal, engine
 
 Base.metadata.create_all(bind=engine)
 
@@ -12,9 +12,9 @@ def load_data(session: Session, data: dict):
         album_title = song_data['song']['album']['title']
         album_year = song_data['song']['album']['year']
         song_title = song_data['song']['title']
-        audio_file = song_data['song']['files']['audio']
-        cover_art = song_data['song']['files']['coverArt']
-        poster = song_data['song']['files']['poster']
+        audio_file = f"static/files/audio/{song_data['song']['files']['audio']}"
+        cover_art = f"static/files/images/{song_data['song']['files']['coverArt']}"
+        poster = f"static/files/images/{song_data['song']['files']['poster']}"
 
         artist = session.query(Artist).filter_by(name=artist_name).first()
         if not artist:
