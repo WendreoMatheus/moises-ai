@@ -1,7 +1,7 @@
-import { GitHubCard } from './GitHubCard'
-import { Loading } from './Loading'
-import { RepoCard } from './RepoCard'
-import { ErrorMessage } from './ErrorMessage'
 import { Breadcrumb } from './BreadCrumb'
+import { ErrorMessage } from './ErrorMessage'
+import { Loading } from './Loading'
+import { SongCard } from './SongCard'
 
-export { ErrorMessage, GitHubCard, Breadcrumb, Loading, RepoCard }
+export { Breadcrumb, ErrorMessage, Loading, SongCard }
+

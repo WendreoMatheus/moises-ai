@@ -1,12 +1,11 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import { Provider } from 'jotai'
-import { createStore } from 'jotai'
-import Home from '@/Pages/Home'
+import { render, screen, waitFor } from '@testing-library/react'
+import { createStore, Provider } from 'jotai'
+import { Route, MemoryRouter as Router, Routes } from 'react-router'
 import { Server } from 'miragejs'
 import { makeServer } from '@/mirage/server'
-import { MemoryRouter } from 'react-router'
+import Profile from '..'
 
-describe('Home Component', () => {
+describe('Profile Component', () => {
   let store: ReturnType<typeof createStore>
   let server: Server
 
@@ -22,41 +21,35 @@ describe('Home Component', () => {
     store = createStore()
   })
 
-  test('displays user data on successful fetch', async () => {
-    render(
-      <MemoryRouter>
-        <Provider store={store}>
-          <Home />
-        </Provider>
-      </MemoryRouter>
-    )
-
-    fireEvent.change(screen.getByPlaceholderText(/Username/i), {
-      target: { value: 'WendreoMatheus' },
-    })
-
-    fireEvent.click(screen.getByRole('button', { name: /Buscar/i }))
-
-    await waitFor(() => {
-      expect(screen.getByText(/Wendreo Matheus/i)).toBeInTheDocument()
-    })
-  })
-
-  test('shows error message on failed fetch', async () => {
-    render(
+  test('fetches and displays the list of repositories', async () => {
+    const { container } = render(
       <Provider store={store}>
-        <Home />
+        <Router initialEntries={['/profile/WendreoMatheus']}>
+          <Routes>
+            <Route path="/profile/:username" element={<Profile />} />
+          </Routes>
+        </Router>
       </Provider>
     )
 
-    fireEvent.change(screen.getByPlaceholderText(/Username/i), {
-      target: { value: 'invaliduser' },
+    await waitFor(() => {
+      expect(container.querySelectorAll('.repo-card').length).toEqual(28)
     })
+  })
 
-    fireEvent.click(screen.getByRole('button', { name: /Buscar/i }))
+  test('displays error message on failure', async () => {
+    render(
+      <Provider store={store}>
+        <Router initialEntries={['/profile/Xorume']}>
+          <Routes>
+            <Route path="/profile/:username" element={<Profile />} />
+          </Routes>
+        </Router>
+      </Provider>
+    )
 
     await waitFor(() => {
-      expect(screen.getByText('Usuário não encontrado')).toBeInTheDocument()
+      expect(screen.getByText(/Repositórios não encontrados/i)).toBeInTheDocument()
     })
   })
 })

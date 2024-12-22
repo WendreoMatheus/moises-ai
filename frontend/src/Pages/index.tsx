@@ -1,5 +1,5 @@
-import Repo from './Repo'
-import Home from './Home'
-import Profile from './Profile'
+import Home from "./Home";
+import SongDetail from "./Song";
 
-export { Repo, Home, Profile }
+export { Home, SongDetail };
+
