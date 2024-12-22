@@ -38,4 +38,9 @@ class SongCreate(SongBase):
 class SongSchema(SongBase):
     id: int
     audio_file: str
-    album: AlbumSchema  
+    album: AlbumSchema
+
+class SongListSchema(SongBase):
+    id: int
+    album_title: str
+    cover_art: str

@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from backend.crud.song import get_songs, get_song, create_song
-from backend.schemas.song import SongCreate, SongSchema
+from backend.schemas.song import SongCreate, SongSchema, SongListSchema
 from backend.db import get_db
 
 songs_router = APIRouter()
 
-@songs_router.get("/songs", response_model=list[SongSchema])
+@songs_router.get("/songs", response_model=list[SongListSchema])
 def read_songs(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     songs = get_songs(db, skip=skip, limit=limit)
     return songs

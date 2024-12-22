@@ -8,7 +8,13 @@ def get_song(db: Session, song_id: int):
     return db.query(models.Song).filter(models.Song.id == song_id).first()
 
 def get_songs(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Song).join(models.Album).join(models.Artist).offset(skip).limit(limit).all()        
+    return db.query(
+        models.Song.id,
+        models.Song.title,
+        models.Song.is_favorite,
+        models.Album.title.label('album_title'),
+        models.Album.coverArt.label('cover_art')
+    ).join(models.Album).offset(skip).limit(limit).all()
 
 def get_or_create_artist(db: Session, artist_name: str):
     try:
