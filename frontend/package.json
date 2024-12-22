@@ -69,7 +69,6 @@
     "jest-svg-transformer": "^1.0.0",
     "jest-transform-stub": "^2.0.0",
     "lint-staged": "^15.2.10",
-    "miragejs": "^0.1.48",
     "prettier": "^3.4.1",
     "sass-embedded": "^1.81.1",
     "ts-jest": "^29.2.5",
