@@ -1,0 +1,11 @@
+.breadcrumb {
+  margin-top: 12px;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+}
+.breadcrumb .is-active span {
+  color: #363636;
+  font-weight: bold;
+}

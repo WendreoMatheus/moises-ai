@@ -1,0 +1,61 @@
+/* RepoCard.css */
+
+.repo-card {
+  overflow: hidden;
+  margin: 10px;
+  border-radius: 8px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s;
+  text-decoration: none;
+  color: inherit; /* Inherit text color */
+}
+
+.repo-card:hover {
+  transform: translateY(-5px);
+}
+
+.repo-card .card-content {
+  border-radius: 12px;
+  flex: 1; /* Takes available space */
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.repo-card .language-badge {
+  display: inline-flex;
+  align-items: center;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.9em;
+  margin-bottom: 12px;
+  background-color: inherit; /* Color applied dynamically */
+}
+
+.repo-card .language-badge i {
+  font-size: 1.5em;
+  margin-right: 8px;
+}
+
+.repo-card .card-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: inherit; /* Color applied dynamically */
+  color: #fff; /* Ensure text is readable */
+  border-radius: 0 !important;
+}
+
+.card {
+  border-radius: 0;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
