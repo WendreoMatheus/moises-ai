@@ -12,8 +12,8 @@ def get_songs(db: Session, skip: int = 0, limit: int = 100):
         models.Song.id,
         models.Song.title,
         models.Song.is_favorite,
-        models.Album.title.label('album_title'),
-        models.Album.coverArt.label('cover_art')
+        models.Album.title.label('albumTitle'),
+        models.Album.coverArt.label('coverArt')
     ).join(models.Album).offset(skip).limit(limit).all()
 
 def get_or_create_artist(db: Session, artist_name: str):

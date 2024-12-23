@@ -42,5 +42,5 @@ class SongSchema(SongBase):
 
 class SongListSchema(SongBase):
     id: int
-    album_title: str
-    cover_art: str
+    albumTitle: str
+    coverArt: str
