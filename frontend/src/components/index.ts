@@ -1,7 +1,6 @@
-import { Breadcrumb } from './BreadCrumb'
 import { ErrorMessage } from './ErrorMessage'
+import { Favorite } from './Favorite'
 import { Loading } from './Loading'
 import { SongCard } from './SongCard'
 
-export { Breadcrumb, ErrorMessage, Loading, SongCard }
-
+export { ErrorMessage, Favorite, Loading, SongCard }

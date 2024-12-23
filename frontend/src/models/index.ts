@@ -1,2 +1,1 @@
-export * from './ISong';
-
+export * from './ISong'

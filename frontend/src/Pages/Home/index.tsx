@@ -1,5 +1,10 @@
-import { FETCH_SONG_LIST_ATOM, SONG_LIST_ATOM, SONG_LIST_ERROR_ATOM, SONG_LIST_LOADING_ATOM } from '@/atoms/SongList.atom'
-import { Breadcrumb, ErrorMessage, Loading, SongCard } from '@/components'
+import {
+  FETCH_SONG_LIST_ATOM,
+  SONG_LIST_ATOM,
+  SONG_LIST_ERROR_ATOM,
+  SONG_LIST_LOADING_ATOM,
+} from '@/atoms/SongList.atom'
+import { ErrorMessage, Loading, SongCard } from '@/components'
 import { useAtomValue, useSetAtom } from 'jotai'
 import { useEffect } from 'react'
 import './Home.css'
@@ -16,16 +21,14 @@ const Home = () => {
 
   return (
     <div className="container">
-      <Breadcrumb />
-
       {loading && <Loading />}
       {error && <ErrorMessage message={error} />}
-
-      <div className='songs-list'>
-        {songs &&
-          songs.map((song) => (
-            <SongCard key={song.id} song={song} />
-          ))}
+      <div className="header">
+        <h1 className="title">Your library</h1>
+        <h3 className="subtitle">You have {songs.length} {songs.length > 1 ? 'songs' : 'song'} on your library</h3>
+      </div>
+      <div className="songs-list">
+        {songs && songs.map((song) => <SongCard key={song.id} song={song} />)}
       </div>
     </div>
   )

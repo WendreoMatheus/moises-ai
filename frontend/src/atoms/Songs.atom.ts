@@ -25,7 +25,7 @@ export const FETCH_SONG_DETAILS_ATOM = atom(null, async (_get, set, { songId }) 
         set(SONG_DETAILS_ERROR_ATOM, 'Unknown error')
       }
     } else {
-        set(SONG_DETAILS_ERROR_ATOM, 'Unknown error')
+      set(SONG_DETAILS_ERROR_ATOM, 'Unknown error')
     }
     set(SONG_DETAILS_ERROR_ATOM, 'Failed to fetch song details')
   } finally {

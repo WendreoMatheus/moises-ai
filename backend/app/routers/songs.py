@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from backend.app import models
 from backend.app.crud.song import get_songs, get_song, create_song
 from backend.app.schemas.song import SongCreate, SongSchema, SongListSchema
 from backend.app.db import get_db
@@ -18,7 +19,7 @@ def read_song(song_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Song not found")
     return db_song
 
-@songs_router.put("/songs/{song_id}/favorite", response_model=SongSchema)
+@songs_router.patch("/songs/{song_id}/favorite", response_model=SongSchema)
 def favorite_song(song_id: int, db: Session = Depends(get_db)):
     db_song = get_song(db, song_id=song_id)
     if db_song is None:

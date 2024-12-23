@@ -1,5 +1,4 @@
-import Home from "./Home";
-import SongDetail from "./Song";
+import Home from './Home'
+import SongDetail from './Song'
 
-export { Home, SongDetail };
-
+export { Home, SongDetail }

@@ -1,6 +1,20 @@
 .songs-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 32px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.header {
+  margin: 50px 0;
+}
+
+.header h1 {
+  font-style: 2rem;
+  font-weight: 600;
+}
+
+.header h3 {
+  font-style: 1rem;
+  font-weight: 500;
 }
