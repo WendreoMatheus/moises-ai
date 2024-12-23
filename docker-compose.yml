@@ -44,5 +44,16 @@ services:
       - make
       - server
 
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend.dockerfile
+    container_name: moises_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
 volumes:
   postgres_data:
