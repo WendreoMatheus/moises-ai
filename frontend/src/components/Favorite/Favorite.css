@@ -10,6 +10,10 @@
   font-size: 1.125rem;
 }
 
+.favorite-button i {
+  color: white;
+}
+
 .favorite-button .fas.fa-heart {
   color: #f8594e;
 }

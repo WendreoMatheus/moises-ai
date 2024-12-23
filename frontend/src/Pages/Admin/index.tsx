@@ -58,7 +58,7 @@ const Admin = () => {
         {songs &&
           songs.length > 0 &&
           songs.map((song) => (
-            <li>
+            <li key={song.id}>
               <span>
                 {song.title} - {song.albumTitle}
               </span>

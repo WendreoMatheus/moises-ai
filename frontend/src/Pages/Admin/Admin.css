@@ -33,6 +33,11 @@
   border-radius: 12px;
 }
 
+.admin-songs-list span {
+  line-height: 250%;
+  color: white;
+}
+
 .admin-songs-list ul {
   width: 100%;
 }
