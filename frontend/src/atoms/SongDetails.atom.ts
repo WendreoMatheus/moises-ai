@@ -7,7 +7,7 @@ import { SONG_LIST_ATOM } from './SongList.atom'
 export const SONG_DETAILS_ATOM = atom<ISongDetails | undefined>()
 export const SONG_DETAILS_ERROR_ATOM = atom<string | undefined>()
 export const SONG_DETAILS_LOADING_ATOM = atom<boolean>(true)
-export const SET_FAVORITE_LOADING_ATOM = atom<boolean>(false)
+export const SET_FAVORITE_LOADING_ATOM = atom<number | undefined>(undefined)
 
 export const FETCH_SONG_DETAILS_ATOM = atom(null, async (_get, set, { songId }) => {
   set(SONG_DETAILS_ATOM, undefined)
@@ -39,7 +39,7 @@ export const FAVORITE_SONG_ATOM = atom(
   null,
   async (get, set, { songId, context = 'songDetails' }) => {
     try {
-      set(SET_FAVORITE_LOADING_ATOM, true)
+      set(SET_FAVORITE_LOADING_ATOM, songId)
       const response = await api.patch(`/songs/${songId}/favorite`)
       if (context === 'songDetails') {
         const song = get(SONG_DETAILS_ATOM)
@@ -68,7 +68,7 @@ export const FAVORITE_SONG_ATOM = atom(
       }
       console.error('Failed to favorite the song', error)
     } finally {
-      set(SET_FAVORITE_LOADING_ATOM, false)
+      set(SET_FAVORITE_LOADING_ATOM, undefined)
     }
   }
 )
