@@ -25,22 +25,30 @@ class AlbumSchema(AlbumBase):
     id: int
     artist: ArtistSchema  
 
-class AlbumCreate(AlbumBase):
-    pass
-
+class AlbumCreate(BaseModel):
+    title: str
+    year: int
+    coverArt: str
+    poster: str
 class SongBase(ConfigBase):
     title: str
-    is_favorite: bool
 
-class SongCreate(SongBase):
-    pass    
+class SongCreate(BaseModel):
+    title: str
+    artist: str
+    album: AlbumCreate
+    audio: str
 
 class SongSchema(SongBase):
     id: int
     audio_file: str
     album: AlbumSchema
+    is_favorite: bool
 
 class SongListSchema(SongBase):
     id: int
     albumTitle: str
     coverArt: str
+
+class SongDeleteSchema(BaseModel):
+    message: str

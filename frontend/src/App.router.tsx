@@ -5,10 +5,10 @@ import React, { Suspense } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router'
 import './App.css'
 import Admin from './Pages/Admin'
-import NewSong from './Pages/NewSong'
 
 const Home = React.lazy(() => import('@/Pages/Home'))
 const SongDetail = React.lazy(() => import('@/Pages/SongDetail'))
+const NewSong = React.lazy(() => import('@/Pages/NewSong'))
 
 const AppRouter = () => {
   return (

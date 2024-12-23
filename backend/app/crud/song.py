@@ -53,14 +53,13 @@ def handle_response_validation_error(e: SQLAlchemyError):
 
 def create_song(db: Session, song: schemas.SongCreate):
     try:
-        artist = get_or_create_artist(db, song.album.artist.name)
+        artist = get_or_create_artist(db, song.artist)
         album = get_or_create_album(db, song.album, artist.id)
         
         db_song = models.Song(
             title=song.title,
-            audio_file=f"static/files/audio/{song.files['audio']}",
+            audio_file=f"static/files/audio/{song.audio}",
             album_id=album.id,
-            artist_id=artist.id
         )
         db.add(db_song)
         db.commit()
@@ -69,3 +68,16 @@ def create_song(db: Session, song: schemas.SongCreate):
     except SQLAlchemyError as e:
         db.rollback()
         handle_response_validation_error(e)
+
+def delete_song(db: Session, song_id: int):
+    try:
+        song = db.query(models.Song).filter(models.Song.id == song_id).first()
+        if not song:
+            raise HTTPException(status_code=404, detail="Song not found")
+        
+        db.delete(song)
+        db.commit()
+        return {"message": "Song deleted successfully"}
+    except SQLAlchemyError as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Error deleting song: {str(e)}")

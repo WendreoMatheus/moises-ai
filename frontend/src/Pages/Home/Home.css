@@ -18,3 +18,7 @@
   font-style: 1rem;
   font-weight: 500;
 }
+
+.header .button {
+  height: 48px;
+}

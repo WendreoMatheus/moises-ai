@@ -7,6 +7,7 @@ import { ErrorMessage, Loading } from '@/components'
 import SongForm from '@/components/SongForm'
 import { useAtomValue, useSetAtom } from 'jotai'
 import { useEffect } from 'react'
+import { NavLink } from 'react-router'
 import './NewSong.css'
 
 const NewSong = () => {
@@ -23,7 +24,7 @@ const NewSong = () => {
       {loading && <Loading />}
       {error && <ErrorMessage message={error} />}
       <div className="header">
-        <h1 className="title">NewSong</h1>
+        <h1 className="title"><NavLink to={'/admin'}> Admin </NavLink> / NewSong</h1>
         <SongForm />
       </div>
     </div>

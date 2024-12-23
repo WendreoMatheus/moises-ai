@@ -7,7 +7,7 @@ import {
 import { ErrorMessage, Loading } from '@/components'
 import { api } from '@/config/api'
 import { useAtomValue, useSetAtom } from 'jotai'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router'
 import './Admin.css'
 
@@ -16,6 +16,7 @@ const Admin = () => {
   const fetchSongs = useSetAtom(FETCH_SONG_LIST_ATOM)
   const loading = useAtomValue(SONG_LIST_LOADING_ATOM)
   const error = useAtomValue(SONG_LIST_ERROR_ATOM)
+    const [loadingSongIds, setLoadingSongIds] = useState<Array<number>>([]);
 
   useEffect(() => {
     fetchSongs()
@@ -23,12 +24,19 @@ const Admin = () => {
 
   const deleteSong = (id: number) => async () => {
     try {
+      setLoadingSongIds((prev) => [...prev, id])
       await api.delete(`/songs/${id}`)
       fetchSongs()
       alert('Song deleted successfully!')
     } catch (error) {
       console.error(error)
+    } finally {
+      setLoadingSongIds((prev) => prev.filter((songId) => songId !== id))
     }
+  }
+
+  const isLoading = (id: number): boolean => {
+    return loadingSongIds.includes(id)
   }
 
   return (
@@ -36,7 +44,7 @@ const Admin = () => {
       {loading && <Loading />}
       {error && <ErrorMessage message={error} />}
       <div className="header">
-        <h1 className="title">Admin</h1>
+        <h1 className="title"><NavLink to={'/'}>Home</NavLink> / Admin</h1>
         <NavLink to={'/admin/new-song'} className='button is-success'>Adicionar</NavLink>
       </div>
       <ul className="is-flex is-flex-direction-column is-flex-justify-content-space-between">
@@ -49,7 +57,7 @@ const Admin = () => {
               </span>
               <div className="options">
                 <button className="button is-warning">Editar</button>
-                <button className="button is-danger" onClick={deleteSong(song.id)}>Excluir</button>
+                <button disabled={isLoading(song.id)} className={`button is-danger ${isLoading(song.id) && 'is-loading'}`} onClick={deleteSong(song.id)}>Excluir</button>
               </div>
             </li>
           ))}

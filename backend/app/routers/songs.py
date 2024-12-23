@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from backend.app import models
-from backend.app.crud.song import get_songs, get_song, create_song
-from backend.app.schemas.song import SongCreate, SongSchema, SongListSchema
+from backend.app import models, crud, schemas
+from backend.app.crud.song import get_songs, get_song, create_song, delete_song
+from backend.app.schemas.song import SongCreate, SongSchema, SongListSchema, SongDeleteSchema
 from backend.app.db import get_db
 
 songs_router = APIRouter()
@@ -30,5 +30,9 @@ def favorite_song(song_id: int, db: Session = Depends(get_db)):
     return db_song
 
 @songs_router.post("/songs", response_model=SongSchema)
-def create_song(song: SongCreate, db: Session = Depends(get_db)):
+def new_song(song: SongCreate, db: Session = Depends(get_db)):
     return create_song(db=db, song=song)
+
+@songs_router.delete("/songs/{song_id}", response_model=SongDeleteSchema)
+async def destroy_song(song_id: int, db: Session = Depends(get_db)):
+    return delete_song(db, song_id)
