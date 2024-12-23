@@ -1,0 +1,5 @@
+DB_NAME=moises_db
+DB_USER=moises_user
+DB_PASSWORD=password
+DB_PORT=5432
+DB_HOST=localhost

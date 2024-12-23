@@ -16,11 +16,20 @@ app.mount("/api/static", StaticFiles(directory=static_dir), name="static")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/health")
+async def health_check():
+    return {"message": "Server running"}
+@app.get("/seed")
+async def seed_data():
+    from backend.app.seed import main
+    main()
+    return {"message": "Data seeded"}
 
 app.include_router(prefix='/api', router=songs.songs_router)
 
