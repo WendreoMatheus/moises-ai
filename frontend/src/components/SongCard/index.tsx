@@ -1,25 +1,37 @@
+import { baseURL } from '@/config/api'
 import { ISong } from '@/models'
 import { NavLink } from 'react-router'
-import './songCard.css'
+import './SongCard.css'
 
 export const SongCard: React.FC<{ song: ISong }> = ({ song }) => {
 
   return (
     <NavLink
-      to={`/song/${song.id}`}
+      to={`/songs/${song.id}`}
       className="song-card"
     >
-      <div className="card">
+      <div className="song-card-container">
+        <div className="card-image">
+          <figure className="image">
+            <img src={`${baseURL}/${song.coverArt}`} alt={song.title} />
+          </figure>
+        </div>
         <div className="card-content">
-          <p className="title is-5" style={{ marginBottom: '8px' }}>
+          <p className="song-title">
             {song.title}
           </p>
-            <p className="content" style={{ fontSize: '0.9em', color: '#555' }}>
-              {song.artist}
-            </p>
-        </div>
-        <div className="card-footer">
-          <span>{song.isFavorite ? 'Favorito' : 'Não Favorito'} Stars</span>
+          <div>
+            <div className='is-flex is-justify-content-space-between is-align-items-center'>
+          <p className="song-album">
+            {song.albumTitle}
+          </p>
+            <span className={`heart-icon ${song.is_favorite ? 'favorite' : ''}`}>
+            {song.is_favorite ?
+            <i className="fas fa-heart"></i> :
+            <i className="fa-regular fa-heart"></i>}
+          </span>
+          </div>
+          </div>
         </div>
       </div>
     </NavLink>

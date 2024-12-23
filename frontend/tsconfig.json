@@ -28,6 +28,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["src", "./jest.setup.ts", "types/*"],
+  "include": ["src", "types/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

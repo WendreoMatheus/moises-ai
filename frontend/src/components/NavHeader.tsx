@@ -9,8 +9,7 @@ export const NavHeader = () => {
     >
       <div className="navbar-brand">
         <NavLink className="navbar-item" to="/">
-          <i className="fa-brands fa-github-alt has-text-white"></i>
-          <strong className="has-text-white">GITSTARS</strong>
+          <strong className="has-text-white">MOISES-AI</strong>
         </NavLink>
       </div>
     </nav>

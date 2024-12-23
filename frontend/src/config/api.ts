@@ -1,7 +1,9 @@
 import axios from 'axios'
 
+export const baseURL = 'http://localhost:8000/api'
+
 export const api = axios.create({
-  baseURL: process.env.NODE_ENV === 'test' ? '/api' : 'https://api.github.com',
+  baseURL,
   headers: {
     'Content-Type': 'application/json',
   },

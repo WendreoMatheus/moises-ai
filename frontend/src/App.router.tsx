@@ -15,7 +15,7 @@ const AppRouter = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/song/:songId" element={<Song />} />
+          <Route path="/songs/:songId" element={<Song />} />
         </Routes>
       </Suspense>
     </Router>

@@ -31,7 +31,7 @@ const SongDetail = () => {
               <p className="subtitle is-6">{songDetails?.artist.name }</p>
               <div className="content">
                 <br />
-                <strong>{songDetails?.isFavorite ? 'Favorito' : 'Não Favorito'}</strong>
+                <strong>{songDetails?.is_favorite ? 'Favorito' : 'Não Favorito'}</strong>
               </div>
             </div>
           </div>

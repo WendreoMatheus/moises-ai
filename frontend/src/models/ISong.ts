@@ -1,12 +1,12 @@
 export interface ISong {
     id:   number;
-    artist: string;
+    albumTitle: string;
     title:  string;
-    isFavorite: boolean;
+    is_favorite: boolean;
     coverArt:  string;
 }
 
-export type ISongDetails  = Omit<ISong, 'coverArt' | 'artist'> & {
+export type ISongDetails  = Omit<ISong, 'coverArt' | 'albumTitle'> & {
     album:  IAlbum;
     artist: IArtist;
     files:  IFiles;

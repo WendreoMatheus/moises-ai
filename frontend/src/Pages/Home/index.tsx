@@ -2,6 +2,7 @@ import { FETCH_SONG_LIST_ATOM, SONG_LIST_ATOM, SONG_LIST_ERROR_ATOM, SONG_LIST_L
 import { Breadcrumb, ErrorMessage, Loading, SongCard } from '@/components'
 import { useAtomValue, useSetAtom } from 'jotai'
 import { useEffect } from 'react'
+import './Home.css'
 
 const Home = () => {
   const songs = useAtomValue(SONG_LIST_ATOM)
@@ -20,12 +21,10 @@ const Home = () => {
       {loading && <Loading />}
       {error && <ErrorMessage message={error} />}
 
-      <div className="columns is-multiline">
+      <div className='songs-list'>
         {songs &&
           songs.map((song) => (
-            <div key={song.id} className="column is-one-third">
-              <SongCard song={song} />
-            </div>
+            <SongCard key={song.id} song={song} />
           ))}
       </div>
     </div>
