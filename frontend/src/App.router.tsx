@@ -4,6 +4,7 @@ import 'bulma/css/bulma.min.css'
 import React, { Suspense } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router'
 import './App.css'
+import Admin from './Pages/Admin'
 
 const Home = React.lazy(() => import('@/Pages/Home'))
 const SongDetail = React.lazy(() => import('@/Pages/SongDetail'))
@@ -15,6 +16,7 @@ const AppRouter = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/songs/:songId" element={<SongDetail />} />
         </Routes>
       </Suspense>

@@ -13,19 +13,16 @@
   opacity: 50%;
 }
 
-
 .song-detail-page .player {
   display: flex;
   flex-direction: row;
   gap: 34px;
 }
 
-
 .song-detail-page .favorite-button {
   margin: 0;
   padding: 0;
 }
-
 
 .song-detail-page .container {
   padding-top: 75px;

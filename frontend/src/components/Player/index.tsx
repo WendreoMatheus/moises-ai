@@ -58,42 +58,36 @@ const Player: React.FC<IPlayer> = ({ songDetails }) => {
   }, [])
 
   const formatTime = (timeInSeconds: number) => {
-     const minutes = Math.floor(timeInSeconds / 60);
-      const seconds = Math.floor(timeInSeconds % 60);
-  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    const minutes = Math.floor(timeInSeconds / 60)
+    const seconds = Math.floor(timeInSeconds % 60)
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`
   }
 
   return (
     <div className="player-controls">
       <div className="player-header">
-      <button className="button player-toggle is-large" onClick={toggleAudio}>
-      <span className={`icon is-large`}>
-        {!play ? <i className="fa-solid fa-play"></i> : <i className="fa-solid fa-pause"></i>}
-      </span>
-      </button>
-      <div className="song-controls">
-        <div className="song-details-header">
-          <p className="song-title">{songDetails?.title}</p>
-          <Favorite
-            id={songDetails.id}
-            is_favorite={!!songDetails?.is_favorite}
-            context="songDetails"
-          />
+        <button className="button player-toggle is-large" onClick={toggleAudio}>
+          <span className={`icon is-large`}>
+            {!play ? <i className="fa-solid fa-play"></i> : <i className="fa-solid fa-pause"></i>}
+          </span>
+        </button>
+        <div className="song-controls">
+          <div className="song-details-header">
+            <p className="song-title">{songDetails?.title}</p>
+            <Favorite
+              id={songDetails.id}
+              is_favorite={!!songDetails?.is_favorite}
+              context="songDetails"
+            />
+          </div>
+          <div className="song-infos">
+            <p>{songDetails?.album.artist.name}</p>
+            <p>|</p>
+            <p>{songDetails?.album.title}</p>
+            <p>|</p>
+            <p>{songDetails?.album.year}</p>
+          </div>
         </div>
-        <div className="song-infos">
-          <p>
-          {songDetails?.album.artist.name} 
-          </p>
-          <p>|</p>
-          <p>
-          {songDetails?.album.title}
-          </p>
-          <p>|</p>
-          <p>
-          {songDetails?.album.year}
-          </p>
-        </div>
-      </div>
       </div>
       <div className="player-footer">
         <input
@@ -106,12 +100,8 @@ const Player: React.FC<IPlayer> = ({ songDetails }) => {
         />
         <audio ref={moisesRef} src={`${baseURL}/${songDetails?.audio_file}`} />
         <div className="player-times">
-          <p>
-            {formatTime(currentTime)}
-          </p>
-          <p>
-            -{formatTime(duration - currentTime)}
-          </p>
+          <p>{formatTime(currentTime)}</p>
+          <p>-{formatTime(duration - currentTime)}</p>
         </div>
       </div>
     </div>
