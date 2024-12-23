@@ -8,7 +8,7 @@ export interface ISong {
 
 export type ISongDetails = Omit<ISong, 'coverArt' | 'albumTitle'> & {
   album: IAlbum
-  audio: string
+  audio_file: string
 }
 
 export interface IArtist {

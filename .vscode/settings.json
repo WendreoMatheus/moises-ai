@@ -9,11 +9,8 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
   },
-  "python.linting.flake8Args": [
-    "--config=pyproject.toml"
-  ],
+  "python.linting.flake8Args": ["--config=pyproject.toml"],
   "python.sortImports.path": "isort",
-  "python.linting.mypyArgs": [
-    "--config-file=pyproject.toml"
-  ]
+  "python.linting.mypyArgs": ["--config-file=pyproject.toml"],
+  "makefile.configureOnOpen": false
 }

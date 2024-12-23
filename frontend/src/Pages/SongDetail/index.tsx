@@ -3,7 +3,8 @@ import {
   SONG_DETAILS_ATOM,
   SONG_DETAILS_LOADING_ATOM,
 } from '@/atoms/SongDetails.atom'
-import { Favorite, Loading } from '@/components'
+import { Loading } from '@/components'
+import Player from '@/components/Player'
 import { baseURL } from '@/config/api'
 import { useAtomValue, useSetAtom } from 'jotai'
 import { useEffect } from 'react'
@@ -41,22 +42,7 @@ const SongDetail = () => {
                   alt={songDetails?.album.title}
                 />
               </figure>
-              <div className="song-controls">
-                <div className="song-detail-header">
-                  <p className="song-title">{songDetails?.title}</p>
-                  {songId && (
-                    <Favorite
-                      id={parseInt(songId)}
-                      is_favorite={!!songDetails?.is_favorite}
-                      context="songDetails"
-                    />
-                  )}
-                </div>
-                <p className="song-infos">
-                  {songDetails?.album.artist.name} | {songDetails?.album.title} |{' '}
-                  {songDetails?.album.year}
-                </p>
-              </div>
+              {songDetails && <Player songDetails={songDetails} />}
             </div>
           </div>
         </div>
