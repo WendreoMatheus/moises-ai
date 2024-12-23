@@ -47,10 +47,15 @@ export const FAVORITE_SONG_ATOM = atom(
           throw new Error('Song not found')
         }
         song.is_favorite = response.data.is_favorite
-        set(SONG_DETAILS_ATOM, {...song, is_favorite: !song.is_favorite})
+        set(SONG_DETAILS_ATOM, { ...song, is_favorite: !song.is_favorite })
       } else {
         const songs = get(SONG_LIST_ATOM)
-        set(SONG_LIST_ATOM, songs.map(song => song.id === songId ? {...song, is_favorite: !song.is_favorite} : song))
+        set(
+          SONG_LIST_ATOM,
+          songs.map((song) =>
+            song.id === songId ? { ...song, is_favorite: !song.is_favorite } : song
+          )
+        )
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {

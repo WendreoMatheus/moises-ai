@@ -6,7 +6,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router'
 import './App.css'
 
 const Home = React.lazy(() => import('@/Pages/Home'))
-const Song = React.lazy(() => import('@/Pages/Song'))
+const SongDetail = React.lazy(() => import('@/Pages/SongDetail'))
 
 const AppRouter = () => {
   return (
@@ -15,7 +15,7 @@ const AppRouter = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/songs/:songId" element={<Song />} />
+          <Route path="/songs/:songId" element={<SongDetail />} />
         </Routes>
       </Suspense>
     </Router>

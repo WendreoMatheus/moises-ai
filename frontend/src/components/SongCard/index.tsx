@@ -29,7 +29,7 @@ export const SongCard: React.FC<{ song: ISong }> = ({ song }) => {
               <p className="song-album" onClick={handleCardClick}>
                 {song.albumTitle}
               </p>
-              <Favorite context='songsList' is_favorite={song.is_favorite} id={song.id} />
+              <Favorite context="songsList" is_favorite={song.is_favorite} id={song.id} />
             </div>
           </div>
         </div>

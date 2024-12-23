@@ -1,4 +1,4 @@
 import Home from './Home'
-import SongDetail from './Song'
+import SongDetail from './SongDetail'
 
 export { Home, SongDetail }

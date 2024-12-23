@@ -1,0 +1,58 @@
+.song-detail-page {
+  background-color: #12303b;
+  border-radius: none;
+  height: 100vh;
+}
+
+.song-detail-page .background {
+  position: absolute;
+  width: 30vw;
+  height: 30vh;
+  top: 80px;
+  right: 120px;
+  opacity: 50%;
+}
+
+.song-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.song-detail-page .player {
+  display: flex;
+  flex-direction: row;
+  gap: 34px;
+}
+
+.song-detail-page .song-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+}
+
+.song-detail-page .favorite-button {
+  margin: 0;
+  padding: 0;
+}
+
+.song-detail-page .song-infos {
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+}
+
+.song-detail-page .container {
+  padding-top: 75px;
+  height: 100%;
+}
+
+.song-detail-page figure {
+  width: 204px;
+  height: 204px;
+}
+
+.song-detail-page .song-controls {
+  padding: 20px 0;
+  width: 310px;
+}
