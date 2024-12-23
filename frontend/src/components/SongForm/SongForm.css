@@ -1,5 +1,4 @@
-.css
-.song-form {
+.css .song-form {
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
@@ -25,7 +24,7 @@
 .submit-btn {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;

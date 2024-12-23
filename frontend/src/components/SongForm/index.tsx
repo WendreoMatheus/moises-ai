@@ -1,34 +1,36 @@
-import { api } from '@/config/api';
-import React, { FormEvent, useState } from 'react';
-import './SongForm.css';
+import { api } from '@/config/api'
+import React, { FormEvent, useState } from 'react'
+import './SongForm.css'
 
-interface ISongForm {
+export interface ISongForm {
+  update?: boolean
+  songId?: number
   initialData?: {
-    title: string;
-    artist: string;
+    title: string
+    artist: string
     album: {
-      title: string;
-      year: number;
-      coverArt: string;
-      poster: string;
-    };
-    audio: string;
-  };
+      title: string
+      year: number
+      coverArt: string
+      poster: string
+    }
+    audio: string
+  }
 }
 
-interface ISongData {
-  title: string;
-  artist: string;
+export interface ISongData {
+  title: string
+  artist: string
   album: {
-    title: string;
-    year: number;
-    coverArt: string;
-    poster: string;
-  };
-  audio: string;
+    title: string
+    year: number
+    coverArt: string
+    poster: string
+  }
+  audio: string
 }
 
-const SongForm: React.FC<ISongForm> = ({ initialData }) => {
+const SongForm: React.FC<ISongForm> = ({ initialData, update, songId }) => {
   const [formData, setFormData] = useState({
     title: initialData?.title || '',
     artist: initialData?.artist || '',
@@ -36,12 +38,12 @@ const SongForm: React.FC<ISongForm> = ({ initialData }) => {
     albumYear: initialData?.album?.year || new Date().getFullYear(),
     coverArt: initialData?.album?.coverArt || '',
     poster: initialData?.album?.poster || '',
-    audio: initialData?.audio || ''
-  });
+    audio: initialData?.audio || '',
+  })
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    
+    e.preventDefault()
+
     const songData: ISongData = {
       title: formData.title,
       artist: formData.artist,
@@ -51,16 +53,24 @@ const SongForm: React.FC<ISongForm> = ({ initialData }) => {
         coverArt: formData.coverArt || 'default-cover.jpg',
         poster: formData.poster || 'default-poster.jpg',
       },
-        audio: formData.audio || 'default-audio.mp3'
-    };
+      audio: formData.audio || 'default-audio.mp3',
+    }
 
+    if (update) {
+      updateSong(songData)
+    } else {
+      saveSong(songData)
+    }
+  }
+
+  const saveSong = async (songData: ISongData) => {
     try {
       await api.post('/songs', songData, {
         headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      alert('Song submitted successfully!');	
+          'Content-Type': 'application/json',
+        },
+      })
+      alert('Song submitted successfully!')
       setFormData({
         title: '',
         artist: '',
@@ -68,12 +78,25 @@ const SongForm: React.FC<ISongForm> = ({ initialData }) => {
         albumYear: new Date().getFullYear(),
         coverArt: '',
         poster: '',
-        audio: ''
-      });
+        audio: '',
+      })
     } catch (error) {
-      console.error('Error submitting song:', error);
+      console.error('Error submitting song:', error)
     }
-  };
+  }
+
+  const updateSong = async (songData: ISongData) => {
+    try {
+      await api.put('/songs/' + songId, songData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      alert('Song updated successfully!')
+    } catch (error) {
+      console.error('Error updating song:', error)
+    }
+  }
 
   return (
     <form className="song-form" onSubmit={handleSubmit}>
@@ -152,9 +175,11 @@ const SongForm: React.FC<ISongForm> = ({ initialData }) => {
         />
       </div>
 
-      <button type="submit" className="submit-btn">Submit</button>
+      <button type="submit" className="submit-btn">
+        Submit
+      </button>
     </form>
-  );
-};
+  )
+}
 
-export default SongForm;
+export default SongForm

@@ -81,3 +81,38 @@ def delete_song(db: Session, song_id: int):
     except SQLAlchemyError as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Error deleting song: {str(e)}")
+
+def update_song(db: Session, song_id: int, song_data: schemas.SongCreate):
+    try:
+        db_song = db.query(models.Song).filter(models.Song.id == song_id).first()
+        if not db_song:
+            raise HTTPException(status_code=404, detail="Song not found")
+
+        # Update album details
+        album = db.query(models.Album).filter(models.Album.id == db_song.album_id).first()
+        if album:
+            album.title = song_data.album.title
+            album.year = song_data.album.year
+            album.coverArt = f"/static/images/{song_data.album.coverArt}"
+            album.poster = f"/static/images/{song_data.album.poster}"
+            db.commit()
+            db.refresh(album)
+        
+        # Update artist details
+        artist = db.query(models.Artist).filter(models.Artist.id == album.artist_id).first()
+        if artist:
+            artist.name = song_data.artist
+            db.commit()
+            db.refresh(artist)
+
+        #
+        # Update song details
+        db_song.title = song_data.title
+        db_song.audio_file = f"static/files/audio/{song_data.audio}"
+        db.commit()
+        db.refresh(db_song)
+
+        return db_song
+    except SQLAlchemyError as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Error updating song: {str(e)}")

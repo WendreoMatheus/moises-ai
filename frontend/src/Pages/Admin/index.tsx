@@ -16,7 +16,7 @@ const Admin = () => {
   const fetchSongs = useSetAtom(FETCH_SONG_LIST_ATOM)
   const loading = useAtomValue(SONG_LIST_LOADING_ATOM)
   const error = useAtomValue(SONG_LIST_ERROR_ATOM)
-    const [loadingSongIds, setLoadingSongIds] = useState<Array<number>>([]);
+  const [loadingSongIds, setLoadingSongIds] = useState<Array<number>>([])
 
   useEffect(() => {
     fetchSongs()
@@ -39,13 +39,20 @@ const Admin = () => {
     return loadingSongIds.includes(id)
   }
 
+  if (loading) {
+    return <Loading />
+  }
+
   return (
     <div className="container admin-songs-list">
-      {loading && <Loading />}
       {error && <ErrorMessage message={error} />}
       <div className="header">
-        <h1 className="title"><NavLink to={'/'}>Home</NavLink> / Admin</h1>
-        <NavLink to={'/admin/new-song'} className='button is-success'>Adicionar</NavLink>
+        <h1 className="title">
+          <NavLink to={'/'}>Home</NavLink> / Admin
+        </h1>
+        <NavLink to={'/admin/new-song'} className="button is-success">
+          Adicionar
+        </NavLink>
       </div>
       <ul className="is-flex is-flex-direction-column is-flex-justify-content-space-between">
         {songs &&
@@ -56,8 +63,16 @@ const Admin = () => {
                 {song.title} - {song.albumTitle}
               </span>
               <div className="options">
-                <button className="button is-warning">Editar</button>
-                <button disabled={isLoading(song.id)} className={`button is-danger ${isLoading(song.id) && 'is-loading'}`} onClick={deleteSong(song.id)}>Excluir</button>
+                <NavLink to={`/admin/edit/${song.id}`} className="button is-warning">
+                  Editar
+                </NavLink>
+                <button
+                  disabled={isLoading(song.id)}
+                  className={`button is-danger ${isLoading(song.id) && 'is-loading'}`}
+                  onClick={deleteSong(song.id)}
+                >
+                  Excluir
+                </button>
               </div>
             </li>
           ))}

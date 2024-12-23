@@ -25,7 +25,7 @@ class AlbumSchema(AlbumBase):
     id: int
     artist: ArtistSchema  
 
-class AlbumCreate(BaseModel):
+class AlbumCreate(ConfigBase):
     title: str
     year: int
     coverArt: str
@@ -33,7 +33,7 @@ class AlbumCreate(BaseModel):
 class SongBase(ConfigBase):
     title: str
 
-class SongCreate(BaseModel):
+class SongCreate(ConfigBase):
     title: str
     artist: str
     album: AlbumCreate
@@ -50,5 +50,5 @@ class SongListSchema(SongBase):
     albumTitle: str
     coverArt: str
 
-class SongDeleteSchema(BaseModel):
+class SongDeleteSchema(ConfigBase):
     message: str
