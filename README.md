@@ -1,31 +1,43 @@
-# Front-end platform test
+# Moises AI Project
 
-### Common commands
+Welcome to the Moises AI Project! This project is a full-stack application that includes a frontend, backend, and database.
 
-- `node server.js` - start the node server providing the data
-- `npm run dev` - run the development env with nextjs
+## Technologies Used
 
-### Typography
+- **Frontend**: React, Vite, TypeScript, Bulma, Axios
+- **Backend**: FastAPI, SQLAlchemy, PostgreSQL
+- **Database**: PostgreSQL
+- **Containerization**: Docker, Docker Compose
 
-Follow this global css to include font custom using in figma file:
+### Running the Project with Docker Compose
+
+1. Create a `.env` file in the root directory with the following content:
 
 ```
-@font-face {
-  font-family: 'Articulat';
-  src: url('/assets/fonts/ArticulatCF-Medium.otf');
-  font-weight: 600;
-}
-
-@font-face {
-  font-family: 'Articulat';
-  src: url('/assets/fonts/ArticulatCF-Normal.otf');
-  font-weight: 500;
-}
-
-body {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 100%;
-  font-family: 'Articulat', helvetica, arial, sans-serif;
-}
+DB_NAME=your_database_name
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
 ```
+
+2. Build and start the services using Docker Compose:
+
+```sh
+docker-compose up --build
+```
+
+3. Access the frontend application at `http://localhost` and the backend API at `http://localhost:8000`.
+
+4. To seed the database, you can use the `/seed` endpoint:
+
+```sh
+curl http://localhost:8000/seed
+```
+
+This will populate the database with initial data.
+
+### API Documentation
+
+You can access the API documentation at the following paths:
+
+- Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
+- ReDoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
