@@ -1,5 +1,7 @@
 # Moises AI Project
 
+[Application Running](http://138.197.41.160)
+
 Welcome to the Moises AI Project! This project is a full-stack application that includes a frontend, backend, and database.
 
 ## Technologies Used
