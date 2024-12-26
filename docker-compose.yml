@@ -48,7 +48,14 @@ services:
     build:
       context: .
       dockerfile: frontend.dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL}
     container_name: moises_frontend
+    environment:
+      - VITE_API_URL=${VITE_API_URL}
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     ports:
       - "80:80"
     depends_on:

@@ -1,10 +1,15 @@
 # Build stage
-FROM node:18-alpine as builder
+FROM node:20-alpine as builder
 WORKDIR /app
-COPY frontend/package*.json ./
-RUN npm ci
+
+# Build arguments
+ARG VITE_API_URL
+ENV VITE_API_URL=${VITE_API_URL}
+
+# Copy and build
 COPY frontend/ ./
-RUN npm run build
+RUN yarn install --frozen-lockfile && \
+    yarn build
 
 # Production stage
 FROM nginx:alpine
