@@ -49,6 +49,7 @@ class SongListSchema(SongBase):
     id: int
     albumTitle: str
     coverArt: str
+    is_favorite: bool
 
 class SongDeleteSchema(ConfigBase):
     message: str

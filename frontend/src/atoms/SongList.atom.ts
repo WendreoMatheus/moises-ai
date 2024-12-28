@@ -12,7 +12,8 @@ export const FETCH_SONG_LIST_ATOM = atom(null, async (_get, set) => {
   set(SONG_LIST_LOADING_ATOM, true)
   try {
     const response = await api.get('/songs')
-    set(SONG_LIST_ATOM, response.data)
+    const sortedData = response.data.sort((a: ISong, b: ISong) => a.id - b.id)
+    set(SONG_LIST_ATOM, sortedData)
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const { response } = error as AxiosError<{ msg: string }>
